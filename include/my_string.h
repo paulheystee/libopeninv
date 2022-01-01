@@ -16,6 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef MY_STRING_H_INCLUDED
+#define MY_STRING_H_INCLUDED
+
+#include <stdint.h>
 
 #ifndef NULL
 #define NULL 0L
@@ -36,10 +40,18 @@ const char *my_strchr(const char *str, const char c);
 int my_ltoa(char *buf, int val, int base);
 int my_atoi(const char *str);
 char *my_trim(char *str);
+
+/* memcopy: universal inputs length in bytes and startoffset in bytes */
+void umemoffcpy(void* target, void* source, int startoffset, int length);
+/* memcopy: universal inputs length in bytes */
+void umemcpy(void *target, void *source, int length);
+
 void memcpy32(int* target, int *source, int length);
 void memset32(int* target, int value, int length);
 void my_strcpy(char *str1, const char *str2);
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif

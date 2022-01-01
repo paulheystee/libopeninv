@@ -135,6 +135,36 @@ char *my_trim(char *str)
   return str;
 }
 
+//copy from pointer to pointer byte by byte with a start offset
+void umemoffcpy(void* target, void* source, int startoffset, int length)
+{
+   uint8_t *targ; 
+   uint8_t *src;
+
+   targ = (uint8_t*)target;
+   src  = (uint8_t*)source;
+
+   //offset the pointer
+   src+=startoffset;
+
+   while (length--)
+      *targ++ = *src++;
+
+}
+
+//copy from pointer to pointer byte by byte...
+void umemcpy(void* target, void* source, int length)
+{
+   uint8_t *targ; 
+   uint8_t *src;
+
+   targ = (uint8_t*)target;
+   src  = (uint8_t*)source;
+
+   while (length--)
+      *targ++ = *src++;
+}
+
 void memcpy32(int* target, int *source, int length)
 {
    while (length--)
