@@ -45,7 +45,7 @@ public:
    void Send(uint32_t canId, uint32_t data[2], uint8_t len);
    void SendAll();
    void Save();
-   void SetReceiveCallback(void (*recv)(uint32_t, uint32_t*));
+   void SetReceiveCallback(void (*recv)(uint32_t, uint32_t*, uint8_t));
    bool RegisterUserMessage(int canId);
    uint32_t GetLastRxTimestamp();
    int AddSend(Param::PARAM_NUM param, int canId, int offset, int length, s16fp gain);
@@ -89,7 +89,7 @@ private:
    uint32_t lastRxTimestamp;
    SENDBUFFER sendBuffer[SENDBUFFER_LEN];
    int sendCnt;
-   void (*recvCallback)(uint32_t, uint32_t*);
+   void (*recvCallback)(uint32_t, uint32_t*,uint8_t);
    uint16_t userIds[MAX_USER_MESSAGES];
    int nextUserMessageIndex;
    uint32_t canDev;

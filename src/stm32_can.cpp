@@ -72,7 +72,7 @@ struct CANSPEED
 
 Can* Can::interfaces[MAX_INTERFACES];
 
-static void DummyCallback(uint32_t i, uint32_t* d) { i=i; d=d; }
+static void DummyCallback(uint32_t i, uint32_t* d,uint8_t l) { i=i; d=d; l=l;}
 static const CANSPEED canSpeed[Can::BaudLast] =
 {
    { CAN_BTR_TS1_9TQ, CAN_BTR_TS2_6TQ, 9 }, //250kbps
@@ -127,7 +127,7 @@ int Can::AddRecv(Param::PARAM_NUM param, int canId, int offset, int length, s16f
  *
  * \param recv Function pointer to void func(uint32_t, uint32_t[2]) - ID, Data
  */
-void Can::SetReceiveCallback(void (*recv)(uint32_t, uint32_t*))
+void Can::SetReceiveCallback(void (*recv)(uint32_t, uint32_t*,uint8_t))
 {
    recvCallback = recv;
 }
@@ -474,7 +474,7 @@ void Can::HandleRx(int fifo)
          }
          else //Now it must be a user message, as filters block everything else
          {
-            recvCallback(id, data);
+            recvCallback(id, data,length);
          }
       }
    }
